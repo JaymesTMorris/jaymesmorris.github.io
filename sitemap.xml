@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://jaymesmorris.com/</loc>
+    <lastmod>2024-09-02</lastmod> <!-- Update to the last modification date of your site -->
+    <changefreq>monthly</changefreq> <!-- Indicate how frequently your content is likely to change -->
+    <priority>1.0</priority> <!-- Priority of this URL relative to other URLs on your site -->
+  </url>
+</urlset>
