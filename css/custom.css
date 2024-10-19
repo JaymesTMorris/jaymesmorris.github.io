@@ -1,65 +1,142 @@
-.gantt-chart {
-    max-width: 1000px;
-    margin: auto;
-    /*border: 1px solid #ddd;*/
-    padding: 20px;
-    position: relative;
-}
-
-.timeline {
+/* Chart Container Styling */
+.fix-12-12-chart {
+    max-width: 1114px !important;
+    margin: 0 auto; /* Center the fixed-width container */
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    flex-direction: column; /* Stack chart and text vertically */
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
-.date {
-    flex: 1;
+.chartContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 700px;
+    height: 250px; /* Reduced from 350px */
+    margin: 0 auto;
+}
+
+.chartBox {
+    width: 100%;
+    height: 100%;
+    padding: 10px; /* Reduced from 20px to decrease internal spacing */
+    border-radius: 20px;
+    border: solid 3px rgba(54, 162, 235, 1);
+    background: rgba(255, 255, 255, 0.3);
+    box-sizing: border-box;
+}
+
+/* Text Styling for Below Chart */
+.chart-text {
+    font-size: 12px;
+    line-height: 1.5;
+    color: #fff;
     text-align: center;
-    font-weight: bold;
+    margin-top: 10px;
+    max-width: 700px; /* Align text width with chart */
+    padding: 0;
 }
 
-.tasks {
-    position: relative;
-    padding-left: 150px; /* Space for labels */
+/* Ensure parent elements don't add extra padding */
+.content, .container, .wrap {
+    width: 100%;
+    padding: 0;
 }
 
-.task {
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .chartContainer {
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9; /* Maintain the aspect ratio for small screens */
+    }
+    
+    .chartBox {
+        height: auto;
+    }
+
+    .chart-text {
+        font-size: 10px;
+        line-height: 1.3;
+    }
+}
+
+/* Ensure parent elements don't add extra padding */
+.content, .container, .wrap {
+    width: 100%;
+    padding: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .chartContainer {
+        max-width: 100%;
+        height: auto;
+        aspect-ratio: 16 / 9;
+    }
+    
+    .chartBox {
+        height: auto;
+    }
+
+    .chart-text {
+        font-size: 10px;
+        line-height: 1.3;
+    }
+}
+
+/* Target the image on the first slide */
+.slide .content img {
+    max-width: 60%; /* Set the width to 60% of its container */
+    height: auto; /* Keep the aspect ratio */
+    margin: 0 auto; /* Center the image */
+}
+
+/* Social Media Icon Styling */
+.social-circles {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.social-circles li {
+    display: inline-block;
+}
+
+.social-circles li a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.1);
     display: flex;
     align-items: center;
-    margin-bottom: 5%;
+    justify-content: center;
+    transition: background-color 0.3s;
 }
 
-.label {
-    width: 150px;
-    text-align: right;
-    margin-right: 10px;
-    font-weight: bold;
-    position: absolute;
-    left: -160px; /* Move label outside of chart */
+.social-circles li a svg {
+    fill: #fff;
+    width: 24px;
+    height: 24px;
 }
 
-.bar {
-    height: 15%;
-    border-radius: 4px;
-    position: absolute;
+.social-circles li a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
-.navy {
-    background-color: darkgreen;
-}
-
-.wcs-n {
-    background-color: lightseagreen;
-}
-
-.target {
-    background-color: red;
-}
-
-.reserve {
-    background-color: lightgreen;
-}
-
-.student {
-    background-color: goldenrod;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .task {
+        margin-bottom: 4px; /* Further reduced spacing on mobile */
+    }
+    
+    .label {
+        font-size: 0.75em; /* Even smaller font on mobile */
+    }
 }
