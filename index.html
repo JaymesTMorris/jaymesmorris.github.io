@@ -1,42 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    
-    <!-- Page Title -->
-    <title>Jaymes Morris - Official Website | Personal Portfolio</title>
-    
-    <!-- Compressed Styles -->
-    <link href="css/slides.min.css?41331" rel="stylesheet" type="text/css">
-    
-    <!-- Custom Styles -->
-    <link href="css/custom.css" rel="stylesheet" type="text/css">
-    
-    <!-- jQuery 3.3.1 -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    
-    <!-- Compressed Scripts -->
-    <script src="js/slides.min.js?41331" type="text/javascript"></script>
-
-    <!-- Load Chart.js and date adapter from CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.0.1/dist/chart.umd.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
-
-    <!-- Fonts and Material Icons -->
-    <link rel="stylesheet" as="font" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,600,700|Material+Icons"/>
-    
-    <!-- Meta Description -->
-    <meta name="description" content="Welcome to the official website of Jaymes Morris. Explore my portfolio, projects, and more. Often misspelled as James Morris, but you're in the right place!">
-    
-    <!-- Meta Keywords -->
-    <meta name="keywords" content="Jaymes Morris, James Morris, Personal Website, Portfolio, Computing and Informatics">
-    
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="Jaymes Morris - Personal Website">
-    <meta property="og:description" content="Explore the portfolio and projects of Jaymes Morris, often misspelled as James Morris.">
-    <meta property="og:url" content="https://jaymesmorris.com">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jaymes Morris | Portfolio</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     
     <!-- Schema Markup -->
     <script type="application/ld+json">
@@ -52,238 +24,57 @@
       ]
     }
     </script>
-</head>
-<body class="slides chain simplifiedMobile animated">
+  </head>
+  <body>
+    <header>
+      <h1>Jaymes Morris</h1>
+      <p>Software Engineer • U.S. Navy Veteran • Rowan ACM Vice President</p>
+      <nav>
+        <a href="index.html" class="nav-link active">Home</a>
+        <a href="pages/experience.html" class="nav-link">Experience</a>
+        <a href="pages/projects.html" class="nav-link">Projects</a>
+        <a href="pages/resume.html" class="nav-link nav-resume-style">Resume</a>
+      </nav>
+    </header>
 
-<!-- Slide 1 (#10) -->
-<section class="slide fade-6 kenBurns">
-  <div class="content">
-    <div class="container">
-      <div class="wrap">
-        <div class="fix-7-12">
-          <img src="assets/img/image-101-3.jpg" class="ae-1 wide rounded margin-bottom-1" alt="Image" />
-          <h1 class="ae-1">Jaymes Morris</h1>
-          <p class="ae-2"><span class="opacity-8">Aspiring software engineer with a problem-solving mindset, ready to translate ideas into clean code.</span></p>
-        </div>  
-      </div>
-    </div>
-  </div>
-  <div class="background" style="background-image:url(assets/img/background/img-10.jpg)"></div>
-</section>
-
-<!-- Slide 2 (#75): Professional Experience -->
-<section class="slide fade-6 kenBurns">
-  <div class="content">
-    <div class="container">
-      <div class="wrap">
-        <div class="fix-10-12 toCenter">
-          <h1 class="ae-1">Professional Experience</h1>
-          <p class="ae-2"><span class="opacity-8">A timeline of my professional roles and career milestones.</span></p>
-        </div>
-        <div class="fix-12-12-chart">
-          <!-- Chart Container -->
-          <div style="width: 100%; max-width: 700px; height: 400px;">
-            <div class="chartContainer">
-              <div class="chartBox">
-                  <canvas id="myChart"></canvas>
-              </div>
-            </div>
-          </div>
-          <!-- Concise Text Below the Chart with a Specific Class -->
-          <p class="chart-text">
-            <strong>Navy (Feb 2020 – Feb 2024):</strong> Led 20 sailors, specialized in radar and electronic warfare.<br/>
-            <strong>Target (Feb 2024 – Sept 2024):</strong> Supported operations, customer service, and store standards.<br/>
-            <strong>Navy Reserve (Apr 2024 – Present):</strong> Maintain security clearance while pursuing education.<br/>
-            <strong>Student Tech Lead (Aug 2024 – Present):</strong> Manage 3D printers, scanners, robotic arms, and lead student workers.
+    <section id="about">
+      <div class="container about-flex">
+        <img
+          src="assets/images/PFPimage.jpg"
+          alt="Jaymes Morris"
+          class="profile-pic"
+        />
+        <div>
+          <h2>About Me</h2>
+          <p>
+            I am a Computer Science student and a Software Engineer intern
+            working with ASRC Federal Mission Solutions as part of
+            Rowan University's research team, where I focus on modernizing
+            naval user interfaces using C++ and Qt (C++ UI framework).
           </p>
+          <p>
+            Before transitioning into software engineering, I served in the
+            U.S. Navy as a Cryptologic Technician Technical (E-5), leading a
+            team of 20 sailors while maintaining electronic warfare and
+            anti-ship missile defense systems. I am currently serving in
+            the Navy Reserves to maintain an active security clearance.
+          </p>
+          <p>
+            I enjoy participating in hackathons and game development
+            competitions, where I collaborate under tight deadlines
+            (i.e., 48 hours) to design and build applications, games, and websites.
+          </p>
+          </a>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="background" style="background-image:url(assets/img/background/img-75.jpg)"></div>
-</section>
-
-<!-- Chart Script -->
-<script>
-  // Data for the jobs
-  const data = {
-    datasets: [
-      {
-        label: 'Navy',
-        data: [{ x: '2020-02-12', y: 1 }, { x: '2024-02-11', y: 1 }],
-        backgroundColor: 'rgba(34, 139, 34, 0.8)', // Dark green
-        borderColor: 'rgba(34, 139, 34, 1)',
-        borderWidth: 10,
-        showLine: true
-      },
-      {
-        label: 'Target',
-        data: [{ x: '2024-02-12', y: 2 }, { x: '2024-09-20', y: 2 }],
-        backgroundColor: 'rgba(255, 0, 0, 0.8)', // Red
-        borderColor: 'rgba(255, 0, 0, 1)',
-        borderWidth: 10,
-        showLine: true
-      },
-      {
-        label: 'Navy Reserve',
-        data: [{ x: '2024-04-03', y: 3 }, { x: new Date().toISOString().split('T')[0], y: 3 }],
-        backgroundColor: 'rgba(0, 128, 128, 0.8)', // Teal
-        borderColor: 'rgba(0, 128, 128, 1)',
-        borderWidth: 10,
-        showLine: true
-      },
-      {
-        label: 'Tech Lead',
-        data: [{ x: '2024-08-20', y: 4 }, { x: new Date().toISOString().split('T')[0], y: 4 }],
-        backgroundColor: 'rgba(54, 162, 235, 0.8)', // Blue
-        borderColor: 'rgba(54, 162, 235, 1)',
-        borderWidth: 10,
-        showLine: true
-      }
-    ]
-  };
-
-  // Chart configuration
-  const config = {
-    type: 'scatter',
-    data,
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: {
-          display: false // Hide legend
-        }
-      },
-      scales: {
-        x: {
-          type: 'time',
-          time: {
-            unit: 'year', // Show only years on the x-axis
-            displayFormats: {
-              year: 'yyyy'
-            },
-            tooltipFormat: 'yyyy'
-          },
-          ticks: {
-          font: {
-            size: 12,  // Adjusted font size
-            family: 'Roboto', // Ensure it's using the correct font
-            weight: '500', // Slightly bolder font
-          },
-          color: '#ffffff' // Bright white text for contrast
-        }
-        },
-        y: {
-          type: 'linear',
-          ticks: {
-            stepSize: 1,
-            padding: 5,
-            callback: function(value) {
-              const labels = ['Navy', 'Target', 'Navy Reserve', 'Tech Lead'];
-              return labels[Math.floor(value) - 1]; // Job titles on y-axis
-            },
-            font: {
-            size: 12,  // Adjusted font size
-            family: 'Roboto', // Ensure it's using the correct font
-            weight: '500', // Slightly bolder font
-          },
-          color: '#ffffff' // Bright white text for contrast
-          }
-        }
-      }
+    </section>
+    <div id="footer-placeholder"></div>
+    <script>
+    async function loadComponent(id, path) {
+      const res = await fetch(path);
+      const html = await res.text();
+      document.getElementById(id).innerHTML = html;
     }
-  };
-
-  // Render the chart
-  const myChart = new Chart(document.getElementById('myChart'), config);
-</script>
-
-<!-- Slide 3 (#90): Projects -->
-<section class="slide fade-6 kenBurns">
-  <div class="content">
-    <div class="container">
-      <div class="wrap">
-        <div class="fix-10-12 toCenter">
-          <h1 class="ae-1">My Projects</h1>
-          <p class="ae-2"><span class="opacity-8">A showcase of my programming projects and software applications.</span></p>
-        </div>
-        <div class="fix-12-12 margin-top-3">
-          <ul class="flex fixedSpaces later left">
-            <li class="col-3-12 col-tablet-1-2 col-phone-1-1">
-              <a href="https://fourteencoast.itch.io/the-customer-is-always-right" class="button rounded empty margin-bottom-2 ae-6">
-                <img class="wide" src="assets/img/TCAR.png" alt="Image Thumbnail"/>
-              </a>
-              <h3 class="ae-7">The Customer's Always Right!</h3>
-              <div class="ae-8"><p class="tiny opacity-6">Made for Rowan ACM Spring '24 Game Jam</p></div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="background" style="background-image:url(assets/img/background/img-90.jpg)"></div>
-</section>
-
-<!-- Slide 4 (#57): Contact Me -->
-<section class="slide fade-6 kenBurns">
-  <div class="content">
-    <div class="container">
-      <div class="wrap">
-        <div class="fix-10-12">
-          <h1 class="fix-9-12 huge ae-1">Contact Me</h1>
-          <ul class="grid equal fixedSpaces margin-top-3">
-            <li class="col-4-12 ae-3">
-              <div class="fix-3-12 equalElement">
-                <h6 class="uppercase opacity-4 margin-top-3 margin-bottom-2">Email</h6>
-                <p class="tiny"><a class="opacity-8" href="mailto:JaymesTMorris16@gmail.com">JaymesTMorris16@gmail.com</a></p>
-              </div>
-            </li>
-            <li class="col-4-12 ae-4">
-              <div class="fix-3-12 equalElement">
-                <h6 class="uppercase opacity-4 margin-top-3 margin-bottom-2">Phone</h6>
-                <p class="tiny"><a class="opacity-8" href="tel:+18563182995">(856) 318-2995</a></p>
-              </div>
-            </li>
-            <li class="col-4-12 ae-5">
-              <div class="fix-3-12 equalElement">
-                <h6 class="uppercase opacity-4 margin-top-3 margin-bottom-2">Social Media</h6>
-                <ul class="social-circles">
-                    <li>
-                        <a class="social-linkedin" href="https://www.linkedin.com/in/jaymesmorris" target="_blank">
-                          <svg aria-hidden="true" class="icon icon-linkedin"><use xlink:href="#linkedin"></use></svg>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="social-github" href="https://github.com/JaymesTMorris" target="_blank">
-                          <svg aria-hidden="true" class="icon icon-github"><use xlink:href="#github"></use></svg>
-                        </a>
-                    </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="background" style="background-image:url(assets/img/background/img-56.jpg)"></div>
-</section>
-
-<!-- SVG Icons -->
-<svg style="display: none;">
-    <!-- LinkedIn Icon -->
-    <symbol id="linkedin" viewBox="0 0 24 24">
-        <path d="M22.23 0H1.77C.8 0 0 .78 0 1.73v20.54C0 23.22.8 24 1.77 24h20.46C23.2 24 24 23.22 24 22.27V1.73C24 .78 23.2 0 22.23 0zM7.06 20.45H3.56V9h3.5v11.45zM5.31 7.57h-.02C4.21 7.57 3.5 6.84 3.5 5.97c0-.89.72-1.6 1.82-1.6 1.1 0 1.8.71 1.81 1.6 0 .87-.71 1.6-1.82 1.6zm13.93 12.88h-3.5V14.9c0-1.39-.02-3.18-1.93-3.18-1.93 0-2.23 1.51-2.23 3.07v5.66h-3.5V9h3.36v1.57h.05c.47-.9 1.61-1.84 3.31-1.84 3.53 0 4.18 2.32 4.18 5.34v6.38z"/>
-    </symbol>
-    <!-- GitHub Icon -->
-    <symbol id="github" viewBox="0 0 24 24">
-        <path d="M12 0C5.372 0 0 5.372 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.26.82-.577v-2.166c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.09-.744.082-.729.082-.729 1.205.084 1.84 1.24 1.84 1.24 1.07 1.834 2.809 1.304 3.492.997.108-.775.418-1.304.762-1.605-2.665-.305-5.466-1.334-5.466-5.93 0-1.31.467-2.382 1.236-3.222-.124-.303-.536-1.526.117-3.176 0 0 1.008-.322 3.3 1.23.957-.266 1.983-.398 3.005-.404 1.022.006 2.048.138 3.006.404 2.29-1.552 3.297-1.23 3.297-1.23.654 1.65.242 2.873.119 3.176.77.84 1.236 1.912 1.236 3.222 0 4.606-2.804 5.623-5.475 5.922.43.371.814 1.102.814 2.222v3.293c0 .32.217.694.825.576C20.565 21.796 24 17.303 24 12c0-6.628-5.373-12-12-12z"/>
-    </symbol>
-</svg>
-
-<!-- Loading Progress Bar -->
-<div class="progress-bar blue"></div>
-
-</body>
+    loadComponent("footer-placeholder", "components/footer.html");
+  </script>
 </html>
