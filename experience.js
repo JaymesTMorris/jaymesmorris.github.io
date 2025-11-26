@@ -32,9 +32,7 @@ function loadSoftware() {
     card.classList.add("project-card");
 
     card.innerHTML = `
-      <h3>
-         <a>${proj.title}</a>
-      </h3>
+      <h3 class="experience-title">${proj.title}</h3>
       <p>${proj.desc}</p>
       <span class="skills-badge" style="font-size:0.75rem; background:#444; padding: 4px 10px;">${proj.type.toUpperCase()}</span>`;
     container.appendChild(card);

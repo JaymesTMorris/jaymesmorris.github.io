@@ -355,6 +355,10 @@ footer {
   border-radius: 10px;
 }
 
+.experience-title {
+  color: var(--accent-color);
+}
+
 @media (max-width: 768px) {
   .modal-content {
     width: 95%;
