@@ -2,10 +2,10 @@ const softwareProjects = [
   {
     title: "ASRC Federal Software Engineer Intern",
     type: "Jan 2025 - Present",
-    desc: "I support ASRC Federal Mission Solutions as part of Rowan University’s research team, helping \
-    modernize U.S. Navy combat-system interfaces using C++ and Qt (a C++ UI framework) to improve usability \
-    and support current naval fleet requirements. I focus on improving usability, updating legacy components, \
-    and contributing to ongoing modernization work."
+    desc: "I support ASRC Federal Mission Solutions as part of Rowan University's research team, \
+    prototyping and redesigning U.S. Navy combat-system interfaces using C++ and Qt. Work includes \
+    overhauling the alert client application to replace a SQLite backend with Redis/Valkey and \
+    introducing an Oat++ WebSocket layer to decouple the UI from the data backend."
   },
   {
     title: "Student Tech Lead at Rowan University",
@@ -16,13 +16,13 @@ const softwareProjects = [
     procedures for lab equipment."
   },
   {
-    title: "Crytptologic Technician Technical (CTT) - US Navy Reserves",
+    title: "Cryptologic Technician Technical (CTT) - US Navy Reserves",
     type: "June 2024 - Present",
     desc: "Continuing service in the U.S. Navy Reserves while pursuing academic and professional goals, \
     maintaining an active clearance."
   },
   {
-    title: "Crytptologic Technician Technical (CTT) - US Navy ACTIVE DUTY",
+    title: "Cryptologic Technician Technical (CTT) - US Navy Active Duty",
     type: "Feb 2019 - Feb 2024",
     desc: "Served as a Cryptologic Technician Technical and Work Center Supervisor, leading a division of \
     20 sailors and ensuring the completion of corrective and preventive maintenance across mission-critical \
