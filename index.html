@@ -1,80 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jaymes Morris | Portfolio</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-    
-    <!-- Schema Markup -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Jaymes Morris",
-      "alternateName": "James Morris",
-      "url": "https://jaymesmorris.com",
-      "sameAs": [
-        "https://www.linkedin.com/in/jaymesmorris",
-        "https://github.com/JaymesTMorris/"
-      ]
-    }
-    </script>
-  </head>
-  <body>
-    <header>
-      <h1>Jaymes Morris</h1>
-      <p>Software Engineer • U.S. Navy Veteran • Rowan ACM Vice President</p>
-      <nav>
-        <a href="index.html" class="nav-link active">Home</a>
-        <a href="pages/experience.html" class="nav-link">Experience</a>
-        <a href="pages/projects.html" class="nav-link">Projects</a>
-        <a href="pages/resume.html" class="nav-link nav-resume-style">Resume</a>
-      </nav>
-    </header>
-
-    <section id="about">
-      <div class="container about-flex">
-        <img
-          src="assets/images/PFPimage.jpg"
-          alt="Jaymes Morris"
-          class="profile-pic"
-        />
-        <div>
-          <h2>About Me</h2>
-          <p>
-            I am a Computer Science student and a Software Engineer intern
-            working with ASRC Federal Mission Solutions as part of
-            Rowan University's research team, where I focus on modernizing
-            naval user interfaces using C++ and Qt (C++ UI framework).
-          </p>
-          <p>
-            Before transitioning into software engineering, I served in the
-            U.S. Navy as a Cryptologic Technician Technical (E-5), leading a
-            team of 20 sailors while maintaining electronic warfare and
-            anti-ship missile defense systems. I am currently serving in
-            the Navy Reserves to maintain an active security clearance.
-          </p>
-          <p>
-            I enjoy participating in hackathons and game development
-            competitions, where I collaborate under tight deadlines
-            (i.e., 48 hours) to design and build applications, games, and websites.
-          </p>
-          </a>
-        </div>
-      </div>
-    </section>
-    <div id="footer-placeholder"></div>
-    <script>
-    async function loadComponent(id, path) {
-      const res = await fetch(path);
-      const html = await res.text();
-      document.getElementById(id).innerHTML = html;
-    }
-    loadComponent("footer-placeholder", "components/footer.html");
-  </script>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Morris Games Archive - Games by Leonard Morris</title>
+<meta name="description" content="Preserving the Commodore 128 games of Leonard Morris (1988-1989). Published in RUN magazine and COMPUTE!'s Gazette.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Press+Start+2P&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    min-height: 100vh;
+    background: #0a0a0f;
+    color: #c8c8d4;
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.85;
+  }
+  .scanline {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none; z-index: 1000;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+  .topbar {
+    border-bottom: 1px solid #1e1e2e; padding: 16px 0;
+    font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: #555568;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .topbar a { color: #7a7a95; text-decoration: none; }
+  .topbar a:hover { color: #a0ffa0; }
+  .header { padding: 64px 0 32px; }
+  .header h1 {
+    font-family: 'Press Start 2P', monospace; font-size: 20px; color: #e0e0f0;
+    text-shadow: 2px 2px 0 #1a1a3a, 0 0 20px rgba(100,255,100,0.15);
+    margin-bottom: 12px; line-height: 1.5;
+  }
+  .header p { color: #8888a0; max-width: 560px; }
+  .game-list { padding: 16px 0 64px; }
+  .game-card {
+    display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center;
+    padding: 20px 0; border-bottom: 1px solid #141420;
+    text-decoration: none; color: inherit; transition: background 0.2s;
+  }
+  .game-card:hover { background: #0e0e1a; margin: 0 -12px; padding: 20px 12px; border-radius: 4px; }
+  .game-year {
+    font-family: 'Space Mono', monospace; font-size: 12px; color: #555568;
+    min-width: 48px;
+  }
+  .game-info h2 {
+    font-family: 'Space Mono', monospace; font-size: 16px; font-weight: 700;
+    color: #d0d0e0; border: none; padding: 0; margin: 0 0 4px;
+  }
+  .game-info .pub { font-size: 11px; color: #7a7a95; }
+  .game-genre {
+    font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: #555568; text-align: right;
+  }
+  .game-card:hover .game-info h2 { color: #7ae67a; }
+  .badge-sm {
+    display: inline-block; font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 2px 8px; border: 1px solid #2a4a2a; border-radius: 2px;
+    color: #7ae67a; background: #0e1a0e; margin-left: 8px; vertical-align: middle;
+  }
+  .coming { opacity: 0.4; pointer-events: none; }
+  .coming .game-info h2::after { content: ' (coming soon)'; font-size: 11px; color: #555568; font-weight: 400; }
+  .footer {
+    border-top: 1px solid #1e1e2e; padding: 32px 0; text-align: center;
+    font-size: 11px; color: #3a3a50; line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+<div class="scanline"></div>
+<div class="wrap">
+  <div class="topbar">
+    <span>Morris Games Archive</span>
+    <a href="../">Home</a>
+  </div>
+  <div class="header">
+    <h1>Morris Games<br>Archive</h1>
+    <p>Preserving the Commodore 128 games of Leonard Morris (1988&ndash;1989). Seven games published across RUN magazine and COMPUTE!'s Gazette. Hosted by the Morris family.</p>
+  </div>
+  <div class="game-list">
+    <a href="mazamorf.html" class="game-card">
+      <div class="game-year">1989</div>
+      <div class="game-info"><h2>Mazamorf <span class="badge-sm">Playable</span></h2><div class="pub">RUN's Fun Pak 128</div></div>
+      <div class="game-genre">Arcade / Maze</div>
+    </a>
+    <div class="game-card coming">
+      <div class="game-year">1989</div>
+      <div class="game-info"><h2>Cubix 2</h2><div class="pub">RUN's Fun Pak 128</div></div>
+      <div class="game-genre">Puzzle</div>
+    </div>
+    <div class="game-card coming">
+      <div class="game-year">1989</div>
+      <div class="game-info"><h2>Cubix 3</h2><div class="pub">RUN's Fun Pak 128</div></div>
+      <div class="game-genre">Puzzle</div>
+    </div>
+    <div class="game-card coming">
+      <div class="game-year">1989</div>
+      <div class="game-info"><h2>Bacteria</h2><div class="pub">COMPUTE!'s Gazette #69</div></div>
+      <div class="game-genre">Shoot'em Up</div>
+    </div>
+    <div class="game-card coming">
+      <div class="game-year">1989</div>
+      <div class="game-info"><h2>Brusher</h2><div class="pub">COMPUTE!'s Gazette #70</div></div>
+      <div class="game-genre">Arcade</div>
+    </div>
+    <div class="game-card coming">
+      <div class="game-year">1989</div>
+      <div class="game-info"><h2>Marathon</h2><div class="pub">COMPUTE!'s Gazette #74</div></div>
+      <div class="game-genre">Arcade</div>
+    </div>
+    <div class="game-card coming">
+      <div class="game-year">1988</div>
+      <div class="game-info"><h2>Square Logix</h2><div class="pub">COMPUTE!'s Gazette #60</div></div>
+      <div class="game-genre">Puzzle / Logic</div>
+    </div>
+    <div class="game-card coming">
+      <div class="game-year">1989</div>
+      <div class="game-info"><h2>Cubix 1</h2><div class="pub">RUN Magazine, July 1989</div></div>
+      <div class="game-genre">Puzzle</div>
+    </div>
+  </div>
+  <div class="footer">
+    <div>Morris Games Archive &mdash; Preserving the work of Leonard Morris</div>
+    <div style="margin-top:4px;">Operated by Jaymes Morris, grandson of the original author</div>
+  </div>
+</div>
+</body>
 </html>

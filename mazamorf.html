@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mazamorf by Leonard Morris - Morris Games Archive</title>
+<meta name="description" content="Mazamorf, an arcade maze game for the Commodore 128 by Leonard Morris. Published in RUN's Fun Pak 128, 1989. Preserved by the Morris family.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Press+Start+2P&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
+    background: #0a0a0f;
+    color: #c8c8d4;
+    font-family: 'IBM Plex Mono', 'Courier New', monospace;
+    font-size: 13px;
+    line-height: 1.85;
+  }
+
+  .scanline {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 1000;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+  }
+
+  .page-wrap {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ---- TOP BAR ---- */
+  .topbar {
+    border-bottom: 1px solid #1e1e2e;
+    padding: 16px 0;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #555568;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .topbar a { color: #7a7a95; text-decoration: none; }
+  .topbar a:hover { color: #a0ffa0; }
+  .topbar-links { display: flex; gap: 20px; }
+
+  /* ---- HERO ---- */
+  .hero {
+    padding: 64px 0 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .hero-text h1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 32px;
+    line-height: 1.4;
+    color: #e0e0f0;
+    margin-bottom: 8px;
+    text-shadow: 2px 2px 0 #1a1a3a, 0 0 20px rgba(100,255,100,0.15);
+  }
+  .byline {
+    font-family: 'Space Mono', monospace;
+    font-size: 15px;
+    color: #7ae67a;
+    margin-bottom: 20px;
+    letter-spacing: 0.02em;
+  }
+  .tagline {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #8888a0;
+    max-width: 420px;
+  }
+  .badge-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+  .badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid #2a2a3e;
+    border-radius: 2px;
+    color: #7a7a95;
+    background: #111120;
+  }
+  .badge.green { border-color: #2a4a2a; color: #7ae67a; background: #0e1a0e; }
+
+  /* ---- SCREEN FRAME ---- */
+  .screen-frame {
+    background: #111118;
+    border: 3px solid #222233;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.5), 0 0 40px rgba(0,0,0,0.3);
+  }
+  .screen-inner {
+    background: #0c0c18;
+    border-radius: 4px;
+    aspect-ratio: 4/3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .screen-inner .placeholder-title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    color: #4ae64a;
+    text-shadow: 0 0 8px rgba(74,230,74,0.4);
+    margin-bottom: 8px;
+  }
+  .screen-inner .placeholder-sub {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 7px;
+    color: #3a7a3a;
+    text-align: center;
+    line-height: 1.8;
+  }
+  .maze-grid {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    gap: 2px;
+    width: 60%;
+    margin: 16px auto;
+    opacity: 0.35;
+  }
+  .maze-cell { aspect-ratio: 1; border-radius: 1px; }
+  .mw { background: #2244aa; }
+  .mp { background: #0c0c18; }
+  .mr { background: #ff3333; border-radius: 50%; }
+  .mg { background: #ffcc00; border-radius: 50%; }
+  .mm { background: #33cc33; border-radius: 50%; }
+  .screen-label {
+    margin-top: 10px;
+    text-align: center;
+    font-size: 10px;
+    color: #444460;
+    letter-spacing: 0.04em;
+  }
+
+  /* ---- TABS ---- */
+  .tab-nav {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid #1e1e2e;
+    margin-top: 8px;
+    overflow-x: auto;
+  }
+  .tab-btn {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    padding: 14px 20px;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: #555568;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: #a0a0b8; }
+  .tab-btn.active { color: #7ae67a; border-bottom-color: #7ae67a; }
+
+  .tab-panel { display: none; padding: 36px 0 64px; }
+  .tab-panel.active { display: block; }
+
+  /* ---- CONTENT ---- */
+  h2 {
+    font-family: 'Space Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    color: #d0d0e0;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #1a1a2a;
+  }
+  h3 {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    font-weight: 700;
+    color: #a0a0c0;
+    margin: 28px 0 12px;
+  }
+  p { color: #9999ad; margin-bottom: 16px; max-width: 680px; }
+
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .info-card {
+    background: #111120;
+    border: 1px solid #1e1e2e;
+    border-radius: 4px;
+    padding: 16px 20px;
+  }
+  .info-card .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #555568;
+    margin-bottom: 6px;
+  }
+  .info-card .value {
+    font-family: 'Space Mono', monospace;
+    font-size: 14px;
+    color: #c8c8d4;
+  }
+
+  .hud-demo { display: flex; gap: 24px; flex-wrap: wrap; margin: 16px 0 24px; }
+  .hud-item {
+    background: #111120;
+    border: 1px solid #1e1e2e;
+    border-radius: 4px;
+    padding: 12px 16px;
+    text-align: center;
+    min-width: 100px;
+  }
+  .hud-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #555568;
+    margin-bottom: 4px;
+  }
+  .hud-val {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 14px;
+    color: #7ae67a;
+  }
+  .hud-val.red { color: #e66a6a; }
+  .hud-val.gold { color: #e6c64a; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 13px;
+  }
+  th {
+    text-align: left;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #555568;
+    padding: 8px 12px;
+    border-bottom: 1px solid #1e1e2e;
+  }
+  td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #141420;
+    color: #9999ad;
+  }
+  td:first-child {
+    font-family: 'Space Mono', monospace;
+    color: #7ae67a;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  td.current { color: #7ae67a; }
+
+  .callout {
+    background: #0e1a0e;
+    border-left: 3px solid #3a7a3a;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 12px;
+    line-height: 1.8;
+    color: #7a9a7a;
+  }
+  .callout.warn { background: #1a1a0e; border-left-color: #7a7a3a; color: #9a9a7a; }
+
+  .timeline { margin: 24px 0; padding-left: 24px; border-left: 2px solid #1e1e2e; }
+  .timeline-item { position: relative; padding: 0 0 28px 20px; }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -29px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #222240;
+    border: 2px solid #3a3a5a;
+  }
+  .timeline-item .year {
+    font-family: 'Space Mono', monospace;
+    font-size: 13px;
+    color: #7ae67a;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .timeline-item .desc { font-size: 12px; line-height: 1.7; color: #8888a0; }
+
+  .legal-section {
+    background: #0f0f1a;
+    border: 1px solid #1e1e2e;
+    border-radius: 6px;
+    padding: 32px;
+    margin: 24px 0;
+  }
+  .legal-section h3 { margin: 0 0 16px 0; color: #c8c8d4; }
+  .legal-section p { font-size: 12px; line-height: 1.9; color: #7a7a90; margin-bottom: 12px; }
+
+  .footer {
+    border-top: 1px solid #1e1e2e;
+    padding: 32px 0;
+    text-align: center;
+    font-size: 11px;
+    color: #3a3a50;
+    line-height: 1.8;
+  }
+  .footer a { color: #555570; text-decoration: none; }
+  .footer a:hover { color: #7ae67a; }
+
+  @media (max-width: 720px) {
+    .hero { grid-template-columns: 1fr; gap: 24px; padding: 32px 0 24px; }
+    .hero-text h1 { font-size: 22px; }
+    .info-grid { grid-template-columns: 1fr; }
+    .hud-demo { gap: 12px; }
+    .hud-item { min-width: 80px; padding: 10px 12px; }
+    .legal-section { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scanline"></div>
+
+<div class="page-wrap">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <span>Morris Games Archive</span>
+    <div class="topbar-links">
+      <a href="./">All Games</a>
+      <a href="../">Home</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-text">
+      <h1>Mazamorf</h1>
+      <div class="byline">by Leonard Morris</div>
+      <p class="tagline">
+        An arcade maze game where the walls have a mind of their own.
+        Dodge the Green Meanies, grab the gold, and survive a labyrinth
+        that never stops shifting beneath your feet.
+      </p>
+      <div class="badge-row">
+        <span class="badge green">C-128</span>
+        <span class="badge">40-Column</span>
+        <span class="badge">Joystick</span>
+        <span class="badge">1 Player</span>
+        <span class="badge">1989</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="screen-frame">
+        <div class="screen-inner">
+          <div class="placeholder-title">MAZAMORF</div>
+          <div class="placeholder-sub">THE EVER CHANGING<br>ADVENTURE</div>
+          <div class="maze-grid" id="maze"></div>
+        </div>
+        <div class="screen-label">Emulator loading area &mdash; game requires C128 disk image</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TABS -->
+  <div class="tab-nav">
+    <button class="tab-btn active" data-tab="about">About</button>
+    <button class="tab-btn" data-tab="howto">How to Play</button>
+    <button class="tab-btn" data-tab="history">Publication History</button>
+    <button class="tab-btn" data-tab="legal">Attribution &amp; Rights</button>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="tab-panel active" id="tab-about">
+    <h2>About the Game</h2>
+    <p>Mazamorf is a one-player, arcade-style maze game with a new twist: the maze keeps changing, forcing you to make quick and decisive moves. A joystick plugged into port 2 is needed to play.</p>
+    <p>You control a red-colored character who scoots around trying to collect gold pots and avoid the horrible Green Meanies. The pots appear one at a time in the corners of the maze. Collecting them increases your score and the number of walls Red can pass through. The pot collection is cumulative from game to game, and when Red has gathered 20, you advance to the next level of play.</p>
+    <p>Four Green Meanies relentlessly pursue Red through the maze. If they catch him, they latch on and sap his health until he can wriggle away. His health level starts at 100 in each game, and the longer his contact with Meanies, the more it decreases. Red should try to avoid the Meanies, but sometimes getting to the gold is more important.</p>
+    <p>Adding to the excitement of Mazamorf are the frequent changes in maze configuration that give the game its name. The pattern of change differs at each of the four levels of play, and the changes are more frequent at higher levels.</p>
+    <p>To shake off Meanies or take a shortcut to a gold pot, Red can pass through a wall, assuming the wall counter on the right side of the screen reads at least 1. It reads 4 at the start of a game, then decreases by one each time he goes through a wall. It increases by one when he grabs a gold pot.</p>
+
+    <h3>On-Screen Display</h3>
+    <div class="hud-demo">
+      <div class="hud-item"><div class="hud-label">Score</div><div class="hud-val">0240</div></div>
+      <div class="hud-item"><div class="hud-label">High Score</div><div class="hud-val">0890</div></div>
+      <div class="hud-item"><div class="hud-label">Health</div><div class="hud-val red">073</div></div>
+      <div class="hud-item"><div class="hud-label">Walls Left</div><div class="hud-val">03</div></div>
+      <div class="hud-item"><div class="hud-label">Pots to Go</div><div class="hud-val gold">14</div></div>
+    </div>
+    <p>When the Meanies sap Red's health down to 50, a warning appears at the bottom of the screen. The game ends when they drain it to zero.</p>
+
+    <div class="info-grid">
+      <div class="info-card"><div class="label">Platform</div><div class="value">Commodore 128</div></div>
+      <div class="info-card"><div class="label">Display Mode</div><div class="value">40-Column</div></div>
+      <div class="info-card"><div class="label">Input</div><div class="value">Joystick (Port 2)</div></div>
+      <div class="info-card"><div class="label">Players</div><div class="value">1 Player</div></div>
+      <div class="info-card"><div class="label">Genre</div><div class="value">Arcade / Maze</div></div>
+      <div class="info-card"><div class="label">Levels</div><div class="value">4</div></div>
+    </div>
+  </div>
+
+  <!-- HOW TO PLAY -->
+  <div class="tab-panel" id="tab-howto">
+    <h2>How to Play</h2>
+    <h3>Objective</h3>
+    <p>Collect 20 gold pots to advance to the next level. Survive all four levels. Gold pots appear one at a time in the corners of the maze. Each pot collected adds to your score and grants one additional wall pass.</p>
+    <h3>Controls</h3>
+    <table><thead><tr><th>Input</th><th>Action</th></tr></thead><tbody>
+      <tr><td>Joystick</td><td>Move Red in any direction through the maze</td></tr>
+      <tr><td>Fire Button</td><td>Pass through an adjacent wall (costs 1 wall charge)</td></tr>
+    </tbody></table>
+    <div class="callout warn">Be careful with the fire button. If Red is not directly next to a wall when you press it, he will move slightly and the wall counter will still decrease. Every press costs a charge whether it works or not.</div>
+    <h3>Wall Passing</h3>
+    <p>The wall counter starts at 4 at the beginning of each game. It decreases by one each time Red passes through a wall and increases by one whenever he collects a gold pot. Use wall passes strategically to escape Meanies or take shortcuts to gold pots.</p>
+    <h3>Green Meanies</h3>
+    <p>Four Green Meanies chase Red throughout the maze. They cannot be killed or stunned. If a Meanie catches Red, it latches on and continuously drains his health until he manages to wriggle free by moving away. Avoid prolonged contact at all costs.</p>
+    <h3>Health System</h3>
+    <p>Red's health starts at 100 each game. Contact with Green Meanies drains it steadily. A warning message appears at the bottom of the screen when health drops to 50. The game ends when health reaches zero. There are no health pickups.</p>
+    <h3>Maze Changes</h3>
+    <p>The maze reconfigures itself periodically during play. The frequency and pattern of these changes differs at each of the four levels, becoming more aggressive at higher levels. A wall you were relying on might vanish, and new walls might appear to block your path. Stay alert and adapt quickly.</p>
+    <h3>Level Progression</h3>
+    <p>Collect 20 gold pots to advance to the next level. Pot collection is cumulative across games within a session. There are four levels total, each with increasingly frequent and unpredictable maze changes.</p>
+    <h3>Scoring</h3>
+    <p>Points are awarded for each gold pot collected. Your current score, highest score, health level, wall counter, and remaining pots needed for the next level are all displayed on screen during play.</p>
+  </div>
+
+  <!-- PUBLICATION HISTORY -->
+  <div class="tab-panel" id="tab-history">
+    <h2>Publication History</h2>
+    <div class="timeline">
+      <div class="timeline-item"><div class="year">1989</div><div class="desc">Mazamorf is published on the <strong>Re-Run Fun Pak 128</strong> compilation disk by IDG Communications, Peterborough, NH. The disk is a special collection of eight new games exclusively for the Commodore 128, sold as a companion product to <em>RUN</em> magazine. Leonard Morris contributes three of the eight games on the disk: Cubix 2, Cubix 3, and Mazamorf. All three run in C-128 40-column mode.</div></div>
+      <div class="timeline-item"><div class="year">1989</div><div class="desc">The Fun Pak 128 booklet introduction, written by Lou Wallace (Technical Manager, RUN Magazine), describes Mazamorf as "a new twist on the classic, maze-style arcade game" where "the mazes keep changing, so besides avoiding the nasties who are following you around, you must also try not to get stuck in the maze!"</div></div>
+      <div class="timeline-item"><div class="year">1992</div><div class="desc">RUN magazine publishes its final issue (November/December 1992, Issue #94). IDG Communications retains the copyright to the magazine's published content.</div></div>
+      <div class="timeline-item"><div class="year">2018</div><div class="desc">Leonard Morris passes away. Copyright interest in his original works transfers to his heirs under US copyright law.</div></div>
+      <div class="timeline-item"><div class="year">2024</div><div class="desc">Lemon64.com user "Frightmare" catalogs Mazamorf in the Lemon64 Commodore game database (Game ID 7329) on July 27, 2024, along with five other Leonard Morris titles. The entry includes screenshots, credits, and a review rating of 5/10 &mdash; the highest score among Morris's cataloged games.</div></div>
+      <div class="timeline-item"><div class="year">2026</div><div class="desc">This preservation page is created by Jaymes Morris, Leonard Morris's grandson and a direct descendant, with family authorization. The game is made available for play through browser-based Commodore 128 emulation as a preservation and tribute effort.</div></div>
+    </div>
+    <h3>Other Games by Leonard Morris</h3>
+    <p>Leonard Morris published at least seven games for the Commodore 128 between 1988 and 1989, across two major American computer magazines:</p>
+    <table><thead><tr><th>Game</th><th>Publication</th><th>Year</th></tr></thead><tbody>
+      <tr><td>Cubix 1</td><td>RUN Magazine, July 1989</td><td>1989</td></tr>
+      <tr><td>Cubix 2</td><td>RUN's Fun Pak 128</td><td>1989</td></tr>
+      <tr><td>Cubix 3</td><td>RUN's Fun Pak 128</td><td>1989</td></tr>
+      <tr><td class="current">Mazamorf</td><td>RUN's Fun Pak 128</td><td>1989</td></tr>
+      <tr><td>Square Logix</td><td>COMPUTE!'s Gazette #60</td><td>1988</td></tr>
+      <tr><td>Bacteria</td><td>COMPUTE!'s Gazette #69</td><td>1989</td></tr>
+      <tr><td>Brusher</td><td>COMPUTE!'s Gazette #70</td><td>1989</td></tr>
+      <tr><td>Marathon</td><td>COMPUTE!'s Gazette #74</td><td>1989</td></tr>
+    </tbody></table>
+    <p>He was credited as both coder and graphics artist on every title. All games were written exclusively for the Commodore 128's native mode, making him one of the dedicated hobbyist programmers who filled the C-128 software gap at a time when most commercial development had moved on.</p>
+  </div>
+
+  <!-- ATTRIBUTION & RIGHTS -->
+  <div class="tab-panel" id="tab-legal">
+    <h2>Attribution &amp; Rights</h2>
+
+    <div class="legal-section">
+      <h3>Author Credit</h3>
+      <p>Mazamorf was created by <strong>Leonard Morris</strong>, who served as both programmer and graphics artist. The game was originally published in 1989 on the Re-Run Fun Pak 128 compilation disk by IDG Communications/Peterborough as a companion product to RUN magazine, an American monthly publication dedicated to Commodore home computers.</p>
+      <p>Leonard Morris was a hobbyist programmer who published at least seven games for the Commodore 128 between 1988 and 1989 across two nationally distributed magazines: RUN (IDG Communications) and COMPUTE!'s Gazette (COMPUTE! Publications, Inc.). His work appeared alongside other notable C-128 contributors in the Fun Pak 128 collection, which was specifically commissioned by RUN to address the shortage of software written for the Commodore 128's native mode. The Fun Pak 128 booklet introduction, written by RUN Technical Manager Lou Wallace, described Leonard Morris's contributions directly and praised the puzzle and arcade games he delivered.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>Original Publication</h3>
+      <p><strong>Title:</strong> Mazamorf</p>
+      <p><strong>Publication:</strong> Re-Run Fun Pak 128 (compilation disk), RUN Magazine, IDG Communications/Peterborough, 80 Elm Street, Peterborough, NH 03458</p>
+      <p><strong>Year:</strong> 1989</p>
+      <p><strong>Original copyright notice:</strong> "The entire contents are copyrighted 1989 by IDG Communications/Peterborough."</p>
+      <p><strong>Original copy permission:</strong> The Fun Pak 128 booklet stated: "Since your Fun Pak 128 is completely unprotected, please feel free to make copies for your own use."</p>
+      <p><strong>Platform:</strong> Commodore 128, 40-column mode, joystick (port 2)</p>
+      <p><strong>Disk location:</strong> Side 1 (40-column games) of the Fun Pak 128 autoboot disk</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>Family Authorization</h3>
+      <p>This website is operated by <strong>Jaymes Morris</strong>, Leonard Morris's grandson and a direct descendant of the original author. The games presented on this site are hosted with the knowledge and authorization of Leonard Morris's surviving family, who are the heirs to any copyright interest retained by the author at the time of his death in 2018.</p>
+      <p>Under the United States Copyright Act (Title 17, U.S. Code), copyright in a work created after January 1, 1978 endures for the life of the author plus 70 years. Where the author did not transfer copyright through a written agreement, copyright passes to the author's heirs through normal estate succession. The Morris family asserts a good-faith claim to the author's retained rights in these works and authorizes their presentation here for preservation, education, and tribute purposes.</p>
+      <p>This site does not offer the games for download. The games are presented for in-browser play through emulation solely as a historical preservation and family tribute effort. No commercial use is made of these works.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>Publisher Copyright Notice</h3>
+      <p>The original compilation disk bore the notice: "Copyright 1989 IDG Communications/Peterborough. Unauthorized duplication is a violation of applicable laws." IDG Communications was subsequently acquired through multiple corporate transactions (China Oceanwide Holdings Group, 2017; Blackstone Inc., 2021) and its publishing division was rebranded as Foundry, later sold to Regent LP in 2025. The extent to which any successor entity holds or claims copyright to individual game programs from the 1989 Fun Pak 128 disk is unknown.</p>
+      <p>If any party believes they hold rights to this work and objects to its presentation here, please contact the site operator. Legitimate rights claims will be addressed promptly and in good faith.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>Emulation &amp; Preservation</h3>
+      <p>This game is presented through browser-based emulation of the Commodore 128 hardware platform, which has not been manufactured since 1989. The original disk image used is sourced from publicly available archives. The emulation is provided as a means of experiencing historically significant software on hardware that is no longer commercially available, in the spirit of digital preservation.</p>
+      <p>The Commodore 128, BASIC 7.0, and related trademarks are the property of their respective holders. This site is not affiliated with or endorsed by any former Commodore entity, IDG Communications, Blackstone Inc., Regent LP, or any of their subsidiaries or successors.</p>
+    </div>
+
+    <div class="legal-section">
+      <h3>External Database Entry</h3>
+      <p>Mazamorf is cataloged in the Lemon64 Commodore game database as Game ID 7329. The entry, including screenshots and metadata, was added by Lemon64 contributor "Frightmare" on July 27, 2024. The database listing can be viewed at <a href="https://www.lemon64.com/game/mazamorf" style="color:#7ae67a;">lemon64.com/game/mazamorf</a>.</p>
+    </div>
+
+    <div class="callout" style="margin-top:32px;">
+      <strong>Contact:</strong> For rights inquiries, corrections, or additional information about Leonard Morris's published works, please contact the site operator at [your email here].
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div>Morris Games Archive &mdash; Preserving the work of Leonard Morris (1989)</div>
+    <div style="margin-top:4px;">Operated by Jaymes Morris, grandson of the original author</div>
+    <div style="margin-top:8px;">
+      <a href="mazamorf.html">Mazamorf</a> &middot;
+      <a href="#">Cubix 2</a> &middot;
+      <a href="#">Cubix 3</a> &middot;
+      <a href="#">Bacteria</a> &middot;
+      <a href="#">Brusher</a> &middot;
+      <a href="#">Marathon</a> &middot;
+      <a href="#">Square Logix</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// Build decorative maze
+(function() {
+  var layout = [
+    1,1,1,1,1,1,1,1,1,1,1,
+    1,0,0,0,1,0,0,0,1,4,1,
+    1,0,1,0,1,0,1,0,0,0,1,
+    1,0,1,0,0,0,1,1,1,0,1,
+    1,0,0,0,1,0,0,0,0,0,1,
+    1,1,1,0,1,0,1,1,0,1,1,
+    1,0,0,0,0,0,1,0,0,0,1,
+    1,0,1,1,1,0,0,0,1,0,1,
+    1,0,0,3,1,0,1,0,0,0,1,
+    1,2,0,0,0,0,1,0,0,3,1,
+    1,1,1,1,1,1,1,1,1,1,1
+  ];
+  var classes = ['mp','mp','mr','mm','mg'];
+  var grid = document.getElementById('maze');
+  for (var i = 0; i < layout.length; i++) {
+    var cell = document.createElement('div');
+    cell.className = 'maze-cell ' + (layout[i] === 1 ? 'mw' : classes[layout[i]]);
+    grid.appendChild(cell);
+  }
+})();
+
+// Tab switching
+document.querySelectorAll('.tab-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.getAttribute('data-tab')).classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
