@@ -53,7 +53,7 @@ READY.
         <tr><td>Down</td><td><kbd>&darr;</kbd> Arrow Down</td></tr>
         <tr><td>Left</td><td><kbd>&larr;</kbd> Arrow Left</td></tr>
         <tr><td>Right</td><td><kbd>&rarr;</kbd> Arrow Right</td></tr>
-        <tr><td>Fire</td><td><kbd>Left Ctrl</kbd></td></tr>
+        <tr><td>Fire</td><td><kbd>Space</kbd> or <kbd>Left Ctrl</kbd></td></tr>
       </table>
     </div>
 
@@ -83,10 +83,10 @@ READY.
       <div class="tab-content" id="tab-howtoplay">
         <h3>How to Play</h3>
         <p><strong>Starting:</strong> Click <em>Start Game</em> to initialize the C128 emulator. When the BASIC prompt appears, load the game from disk using the LOAD command shown above the screen.</p>
-        <p><strong>Movement:</strong> Use the arrow keys to move in four directions (mapped to joystick Port 2).</p>
-        <p><strong>Fire:</strong> Press <kbd>Left Ctrl</kbd> to fire or activate.</p>
+        <p><strong>Movement:</strong> Arrow keys move in four directions (joystick Port 2).</p>
+        <p><strong>Fire:</strong> <kbd>Space</kbd> or <kbd>Left Ctrl</kbd>.</p>
         <p><strong>Objective:</strong> Defeat enemies and survive as long as possible. Specific scoring and game rules will be visible in-game.</p>
-        <p><strong>Tip:</strong> Click Fullscreen after the emulator loads for the best experience. Click inside the emulator canvas to ensure it captures keyboard input.</p>
+        <p><strong>Tip:</strong> Click inside the game screen after loading to ensure keyboard and joystick input are captured. Press <kbd>Escape</kbd> if the mouse cursor disappears.</p>
       </div>
 
       <div class="tab-content" id="tab-history">
@@ -151,6 +151,17 @@ READY.
             clearInterval(focusInterval);
           }
         }, 200);
+
+        // Mirror arrow keys + fire to joystick port 2 alongside direct keyboard input
+        var joy = { 'ArrowUp': 4, 'ArrowDown': 5, 'ArrowLeft': 6, 'ArrowRight': 7, ' ': 0, 'Control': 0 };
+        document.addEventListener('keydown', function(e) {
+          if (joy[e.key] !== undefined && window.EJS_emulator)
+            window.EJS_emulator.gameManager.simulateInput(0, 1, joy[e.key], 1);
+        });
+        document.addEventListener('keyup', function(e) {
+          if (joy[e.key] !== undefined && window.EJS_emulator)
+            window.EJS_emulator.gameManager.simulateInput(0, 1, joy[e.key], 0);
+        });
       };
 
       var s = document.createElement('script');
