@@ -58,9 +58,9 @@ READY.
     </div>
 
     <div class="load-note">
-      <strong>Auto-load:</strong> After clicking Start Game, the emulator boots into C128 BASIC and
-      automatically types <code>LOAD"MAZAMORF",8</code> then <code>RUN</code>.
-      If the game does not start on its own, type those commands at the <code>READY.</code> prompt.
+      <strong>To start:</strong> Click <em>Start Game</em>, wait for the Fun Pak 128 menu to appear,
+      then <strong>click inside the game screen</strong> to give it keyboard focus.
+      Press the letter key shown next to Mazamorf on the menu to load the game.
     </div>
 
     <!-- Info Tabs -->
@@ -137,10 +137,18 @@ READY.
       window.EJS_settings        = { 'vice_joyport': '2', 'vice_autostart': 'disabled' };
 
       window.EJS_ready = function() {
-        setTimeout(function() {
-          sendKeys('LOAD"MAZAMORF",8\r');
-          setTimeout(function() { sendKeys('RUN\r'); }, 2500);
-        }, 6000);
+        var tries = 0;
+        var focusInterval = setInterval(function() {
+          var el = document.querySelector('#game-emulator canvas') ||
+                   document.querySelector('#game-emulator');
+          if (el) {
+            el.click();
+            el.focus();
+            clearInterval(focusInterval);
+          } else if (++tries > 30) {
+            clearInterval(focusInterval);
+          }
+        }, 200);
       };
 
       var s = document.createElement('script');
@@ -150,29 +158,6 @@ READY.
       document.getElementById('btn-start').textContent = 'Loading\u2026';
       document.getElementById('btn-start').disabled = true;
       document.getElementById('btn-fullscreen').disabled = false;
-    }
-
-    function sendKeys(text) {
-      var canvas = document.querySelector('#game-emulator canvas');
-      if (!canvas) { setTimeout(function() { sendKeys(text); }, 1000); return; }
-      var d = 0;
-      for (var i = 0; i < text.length; i++) {
-        (function(ch, delay) {
-          setTimeout(function() {
-            var enter = ch === '\r';
-            var o = {
-              bubbles: true, cancelable: true,
-              key: enter ? 'Enter' : ch,
-              code: enter ? 'Enter' : 'Key' + ch.toUpperCase(),
-              keyCode: enter ? 13 : ch.toUpperCase().charCodeAt(0),
-              which: enter ? 13 : ch.toUpperCase().charCodeAt(0)
-            };
-            canvas.dispatchEvent(new KeyboardEvent('keydown', o));
-            setTimeout(function() { canvas.dispatchEvent(new KeyboardEvent('keyup', o)); }, 50);
-          }, delay);
-        })(text[i], d);
-        d += 150;
-      }
     }
 
     function toggleFullscreen() {
