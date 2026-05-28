@@ -46,9 +46,9 @@ READY.
     </div>
 
     <div class="load-note">
-      <strong>To start:</strong> Click <em>Start Game</em>, wait for the Fun Pak 128 menu to appear,
-      then <strong>click inside the game screen</strong> to give it keyboard focus.
-      Press the letter key shown next to Cubix 2 on the menu to load the game.
+      <strong>To start:</strong> Click <em>Start Game</em> and wait for the Fun Pak 128 menu to appear.
+      Click inside the game screen, then press the letter key shown next to Cubix 2 to load the game.
+      If the mouse cursor disappears, press <kbd>Escape</kbd> to release it.
     </div>
 
     <!-- Info Tabs -->
@@ -121,7 +121,8 @@ READY.
       window.EJS_pathtodata      = 'https://cdn.emulatorjs.org/stable/data/';
       window.EJS_startOnLoaded   = true;
       window.EJS_defaultControls = false;
-      window.EJS_settings        = { 'vice_joyport': '2', 'vice_autostart': 'disabled' };
+      window.EJS_Buttons         = { saveState: false, loadState: false, screenRecord: false, cheat: false, cacheManager: false };
+      window.EJS_settings        = { 'vice_joyport': '2', 'vice_autostart': 'disabled', 'vice_keyboard_passthrough': 'enabled' };
 
       window.EJS_ready = function() {
         var tries = 0;
