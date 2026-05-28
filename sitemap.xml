@@ -2,8 +2,74 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://jaymesmorris.com/</loc>
-    <lastmod>2024-09-02</lastmod> <!-- Update to the last modification date of your site -->
-    <changefreq>monthly</changefreq> <!-- Indicate how frequently your content is likely to change -->
-    <priority>1.0</priority> <!-- Priority of this URL relative to other URLs on your site -->
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://jaymesmorris.com/pages/experience.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jaymesmorris.com/pages/projects.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jaymesmorris.com/pages/resume.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://jaymesmorris.com/morris-games/</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://jaymesmorris.com/morris-games/mazamorf.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://jaymesmorris.com/morris-games/cubix2.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://jaymesmorris.com/morris-games/cubix3.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://jaymesmorris.com/morris-games/square-logix.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://jaymesmorris.com/morris-games/bacteria.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://jaymesmorris.com/morris-games/brusher.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://jaymesmorris.com/morris-games/marathon.html</loc>
+    <lastmod>2026-05-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

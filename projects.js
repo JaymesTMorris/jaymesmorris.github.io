@@ -45,6 +45,15 @@ const games = [
     code: "#",
   },
   {
+    title: "Morris Games Archive",
+    type: "personal",
+    desc: "A preservation archive of seven Commodore 128 games published by my grandfather, Leonard Morris, \
+    in RUN and COMPUTE's Gazette magazines between 1988 and 1989. Features in-browser C128 emulation, game \
+    history, and original attribution — maintained as a family preservation effort.",
+    link: "../morris-games/",
+    code: "#",
+  },
+  {
     title: "AFMS Alert UI",
     type: "swe",
     desc: "A Qt C++ desktop application built during a software engineering internship with ASRC Federal \

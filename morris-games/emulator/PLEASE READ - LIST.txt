@@ -1,0 +1,4 @@
+1988-06.d64 - contains Square Logix game
+1989-03.d64 - contains BATERIA game
+1989-04.d64 - contains Brusher game
+1989-08.d64 - contains Marathon game

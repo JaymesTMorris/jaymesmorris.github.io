@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brusher | Morris Games Archive</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <nav class="site-nav">
+      <a href="../">← Portfolio</a>
+      <a href="index.html">Games Archive</a>
+      <a href="brusher.html" class="active">Brusher</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="game-header">
+      <div class="breadcrumb"><a href="index.html">Games Archive</a> / Brusher</div>
+      <h1>Brusher</h1>
+      <p class="meta">COMPUTE!'s Gazette &middot; Issue 70 &middot; April 1989 &middot; C128 Native Mode &middot; 40-Column</p>
+    </div>
+
+    <!-- Emulator Screen -->
+    <div class="screen-wrap">
+      <div class="screen-label">C128 &mdash; 40-Column Display</div>
+      <div class="screen-frame">
+        <div class="screen-inner" id="screen-inner">
+          <pre class="screen-placeholder-text">    **** COMMODORE 128 BASIC V7.0 ****
+
+ 122365 BYTES FREE
+
+READY.
+
+
+ [ EMULATOR NOT YET LOADED ]
+
+ CLICK START GAME TO BEGIN</pre>
+        </div>
+      </div>
+      <div class="screen-controls">
+        <button class="btn" id="btn-start" onclick="startEmulator()">Start Game</button>
+        <button class="btn" id="btn-fullscreen" onclick="toggleFullscreen()" disabled>Fullscreen</button>
+      </div>
+    </div>
+
+    <!-- Joystick Key Mapping -->
+    <div class="key-map">
+      <h4>Joystick Controls &mdash; Port 2</h4>
+      <table>
+        <tr><td>Up</td><td><kbd>&uarr;</kbd> Arrow Up</td></tr>
+        <tr><td>Down</td><td><kbd>&darr;</kbd> Arrow Down</td></tr>
+        <tr><td>Left</td><td><kbd>&larr;</kbd> Arrow Left</td></tr>
+        <tr><td>Right</td><td><kbd>&rarr;</kbd> Arrow Right</td></tr>
+        <tr><td>Fire</td><td><kbd>Left Ctrl</kbd></td></tr>
+      </table>
+    </div>
+
+    <div class="load-note">
+      <strong>Auto-load:</strong> After clicking Start Game, the emulator boots into C128 BASIC and
+      automatically runs the Gazette disk menu (<code>LOAD"128 MENU",8</code> / <code>RUN</code>).
+      When the menu appears, select <strong>BRUSHER</strong> to load and run the game.
+      If the menu does not load automatically, type <code>LOAD"128 MENU",8</code> then <code>RUN</code> at the <code>READY.</code> prompt.
+    </div>
+
+    <!-- Info Tabs -->
+    <div class="tabs">
+      <div class="tab-nav">
+        <button class="tab-btn active" onclick="switchTab('about', this)">About</button>
+        <button class="tab-btn" onclick="switchTab('howtoplay', this)">How to Play</button>
+        <button class="tab-btn" onclick="switchTab('history', this)">Publication History</button>
+        <button class="tab-btn" onclick="switchTab('attribution', this)">Attribution &amp; Rights</button>
+      </div>
+
+      <div class="tab-content active" id="tab-about">
+        <h3>About Brusher</h3>
+        <p>Brusher is a Commodore 128 arcade game written by Leonard Morris and published in <em>COMPUTE!'s Gazette</em> Issue 70, April 1989. The game runs exclusively in C128 native mode using the 40-column display.</p>
+        <p>Players use a joystick (Port 2) to navigate and clear obstacles from the screen. Leonard Morris served as both coder and graphics artist on this title.</p>
+        <p>This game is preserved here as part of the Morris Games Archive, a family preservation effort maintained by Jaymes Morris (Leonard's grandson).</p>
+      </div>
+
+      <div class="tab-content" id="tab-howtoplay">
+        <h3>How to Play</h3>
+        <p><strong>Starting:</strong> Click <em>Start Game</em> to initialize the C128 emulator. When the BASIC prompt appears, load the game from disk using the LOAD command shown above the screen.</p>
+        <p><strong>Movement:</strong> Use the arrow keys to move in four directions (mapped to joystick Port 2).</p>
+        <p><strong>Fire:</strong> Press <kbd>Left Ctrl</kbd> to fire or activate.</p>
+        <p><strong>Objective:</strong> Navigate the screen, clear obstacles, and score points. Specific rules and mechanics will be visible in-game.</p>
+        <p><strong>Tip:</strong> Click Fullscreen after the emulator loads for the best experience. Click inside the emulator canvas to ensure it captures keyboard input.</p>
+      </div>
+
+      <div class="tab-content" id="tab-history">
+        <h3>Publication History</h3>
+        <p><strong>Publisher:</strong> COMPUTE! Publications — COMPUTE!'s Gazette</p>
+        <p><strong>Issue:</strong> Number 70</p>
+        <p><strong>Cover Date:</strong> April 1989</p>
+        <p><strong>Platform:</strong> Commodore 128 (native mode, 40-column display)</p>
+        <p><strong>Disk Image:</strong> 1989-04.d64 (Gazette Issue 70 companion disk)</p>
+        <p><em>COMPUTE!'s Gazette</em> was a major American computer magazine dedicated to Commodore computers, published from 1983 to 1995. Each issue included a companion disk with programs submitted by readers and contributors.</p>
+      </div>
+
+      <div class="tab-content" id="tab-attribution">
+        <h3>Attribution &amp; Rights</h3>
+        <p><strong>Game Author:</strong> Leonard Morris</p>
+        <p><strong>Roles:</strong> Code, Graphics</p>
+        <p><strong>Originally Published In:</strong> COMPUTE!'s Gazette, Issue 70 (April 1989)</p>
+        <p><strong>Archive Maintained By:</strong> Jaymes Morris (grandson)</p>
+        <p>Leonard Morris was a hobbyist programmer who published seven Commodore 128 games in major American computer magazines between 1988 and 1989. He passed away in 2018.</p>
+        <p>This archive is a personal preservation effort. The games are presented here for historical and educational purposes, to document Leonard Morris's work and make it accessible to future generations.</p>
+        <p>If you have questions about the archive, permissions, or knew Leonard Morris personally, please reach out: <a href="mailto:jaymestmorris16@gmail.com">jaymestmorris16@gmail.com</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    Morris Games Archive &mdash; <a href="../">Jaymes Morris Portfolio</a> &mdash; Games by Leonard Morris (1988&ndash;1989)
+  </footer>
+
+  <script>
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-content').forEach(function(t) { t.classList.remove('active'); });
+      document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+      document.getElementById('tab-' + tabId).classList.add('active');
+      btn.classList.add('active');
+    }
+
+    function startEmulator() {
+      document.getElementById('screen-inner').innerHTML =
+        '<div id="game-emulator" style="width:100%;height:100%;"></div>';
+
+      window.EJS_player          = '#game-emulator';
+      window.EJS_core            = 'vice_x128';
+      window.EJS_gameUrl         = '/morris-games/emulator/1989-04.d64';
+      window.EJS_pathtodata      = 'https://cdn.emulatorjs.org/stable/data/';
+      window.EJS_startOnLoaded   = true;
+      window.EJS_defaultControls = false;
+      window.EJS_settings        = { 'vice_joyport': '2', 'vice_autostart': 'disabled' };
+
+      window.EJS_ready = function() {
+        setTimeout(function() {
+          sendKeys('LOAD"128 MENU",8\r');
+          setTimeout(function() { sendKeys('RUN\r'); }, 2500);
+        }, 6000);
+      };
+
+      var s = document.createElement('script');
+      s.src = 'https://cdn.emulatorjs.org/stable/data/loader.js';
+      document.body.appendChild(s);
+
+      document.getElementById('btn-start').textContent = 'Loading\u2026';
+      document.getElementById('btn-start').disabled = true;
+      document.getElementById('btn-fullscreen').disabled = false;
+    }
+
+    function sendKeys(text) {
+      var canvas = document.querySelector('#game-emulator canvas');
+      if (!canvas) { setTimeout(function() { sendKeys(text); }, 1000); return; }
+      var d = 0;
+      for (var i = 0; i < text.length; i++) {
+        (function(ch, delay) {
+          setTimeout(function() {
+            var enter = ch === '\r';
+            var o = {
+              bubbles: true, cancelable: true,
+              key: enter ? 'Enter' : ch,
+              code: enter ? 'Enter' : 'Key' + ch.toUpperCase(),
+              keyCode: enter ? 13 : ch.toUpperCase().charCodeAt(0),
+              which: enter ? 13 : ch.toUpperCase().charCodeAt(0)
+            };
+            canvas.dispatchEvent(new KeyboardEvent('keydown', o));
+            setTimeout(function() { canvas.dispatchEvent(new KeyboardEvent('keyup', o)); }, 50);
+          }, delay);
+        })(text[i], d);
+        d += 150;
+      }
+    }
+
+    function toggleFullscreen() {
+      var frame = document.querySelector('.screen-frame');
+      if (!document.fullscreenElement) {
+        frame.requestFullscreen && frame.requestFullscreen();
+      } else {
+        document.exitFullscreen && document.exitFullscreen();
+      }
+    }
+  </script>
+</body>
+</html>
