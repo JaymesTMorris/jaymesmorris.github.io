@@ -58,8 +58,7 @@ READY.
     </div>
 
     <div class="load-note">
-      <strong>To start:</strong> Click <em>Start Game</em> and wait for the Fun Pak 128 menu to appear.
-      Click inside the game screen, then press the letter key shown next to Mazamorf to load the game.
+      <strong>To start:</strong> Click <em>Start Game</em> and wait about 30 seconds for the Fun Pak 128 menu to appear. Click inside the screen, then press <kbd>D</kbd> to load Mazamorf (the game loads in a few seconds).
       If the mouse cursor disappears, press <kbd>Escape</kbd> to release it.
     </div>
 
@@ -135,8 +134,8 @@ READY.
       window.EJS_startOnLoaded   = true;
       window.EJS_defaultControls = false;
       window.EJS_Buttons         = { saveState: false, loadState: false, screenRecord: false, cheat: false, cacheManager: false };
-      window.EJS_defaultOptions  = { 'directKeyboard': true, 'lockMouse': false };
-      window.EJS_settings        = { 'vice_joyport': '2', 'vice_joyport_type': '1', 'vice_autostart': 'disabled', 'vice_keyboard_passthrough': 'enabled' };
+      window.EJS_defaultOptions  = { 'keyboardInput': 'enabled', 'lockMouse': false };
+      window.EJS_settings        = { 'vice_joyport': '2', 'vice_joyport_type': '1', 'vice_autostart': 'disabled', 'vice_keyboard_passthrough': 'enabled', 'vice_drive_true_emulation': 'disabled', 'vice_virtual_device_traps': 'enabled' };
 
       window.EJS_ready = function() {
         var tries = 0;
@@ -152,16 +151,18 @@ READY.
           }
         }, 200);
 
-        // Mirror arrow keys + fire to joystick port 2 alongside direct keyboard input
+        // Mirror arrow keys + fire to joystick port 2. simulateInput(player, id, value)
+        // lives on gameManager; ids are RetroPad buttons (4=up,5=down,6=left,7=right,0=fire).
         var joy = { 'ArrowUp': 4, 'ArrowDown': 5, 'ArrowLeft': 6, 'ArrowRight': 7, ' ': 0, 'Control': 0 };
-        document.addEventListener('keydown', function(e) {
-          if (joy[e.key] !== undefined && window.EJS_emulator)
-            window.EJS_emulator.simulateInput(0, 1, joy[e.key], 1);
-        });
-        document.addEventListener('keyup', function(e) {
-          if (joy[e.key] !== undefined && window.EJS_emulator)
-            window.EJS_emulator.simulateInput(0, 1, joy[e.key], 0);
-        });
+        function joyInput(e, value) {
+          var id = joy[e.key];
+          if (id !== undefined && window.EJS_emulator && window.EJS_emulator.gameManager) {
+            window.EJS_emulator.gameManager.simulateInput(0, id, value);
+            e.preventDefault();
+          }
+        }
+        document.addEventListener('keydown', function(e) { joyInput(e, 1); });
+        document.addEventListener('keyup', function(e) { joyInput(e, 0); });
       };
 
       var s = document.createElement('script');

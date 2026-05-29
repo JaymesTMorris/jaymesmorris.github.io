@@ -46,8 +46,7 @@ READY.
     </div>
 
     <div class="load-note">
-      <strong>To start:</strong> Click <em>Start Game</em> and wait for the Fun Pak 128 menu to appear.
-      Click inside the game screen, then press the letter key shown next to Cubix 2 to load the game.
+      <strong>To start:</strong> Click <em>Start Game</em> and wait about 30 seconds for the Fun Pak 128 menu to appear. Click inside the screen, then press <kbd>B</kbd> to load Cubix 2. The game shows <em>ONE MOMENT PLEASE</em> while it loads its graphics &mdash; this can take up to a minute, so please be patient.
       If the mouse cursor disappears, press <kbd>Escape</kbd> to release it.
     </div>
 
@@ -122,8 +121,8 @@ READY.
       window.EJS_startOnLoaded   = true;
       window.EJS_defaultControls = false;
       window.EJS_Buttons         = { saveState: false, loadState: false, screenRecord: false, cheat: false, cacheManager: false };
-      window.EJS_defaultOptions  = { 'directKeyboard': true, 'lockMouse': false };
-      window.EJS_settings        = { 'vice_joyport': '2', 'vice_autostart': 'disabled', 'vice_keyboard_passthrough': 'enabled' };
+      window.EJS_defaultOptions  = { 'keyboardInput': 'enabled', 'lockMouse': false };
+      window.EJS_settings        = { 'vice_joyport': '2', 'vice_autostart': 'disabled', 'vice_keyboard_passthrough': 'enabled', 'vice_drive_true_emulation': 'disabled', 'vice_virtual_device_traps': 'enabled' };
 
       window.EJS_ready = function() {
         var tries = 0;

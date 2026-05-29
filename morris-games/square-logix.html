@@ -46,10 +46,8 @@ READY.
     </div>
 
     <div class="load-note">
-      <strong>To start:</strong> Click <em>Start Game</em>. The disk will autoload &mdash; wait for the game or menu to appear.
-      Click inside the game screen to give it keyboard focus.
+      <strong>To start:</strong> Click <em>Start Game</em>. After the C128 boots, a Gazette disk notice appears &mdash; click inside the screen, press <kbd>Enter</kbd> for the menu, then press <kbd>1</kbd> to load Square Logix. Loading can take up to a minute &mdash; please wait.
       If the mouse cursor disappears, press <kbd>Escape</kbd> to release it.
-      If the disk does not autoload, click the screen and type <code>LOAD"*",8,1</code> then press Enter.
     </div>
 
     <!-- Info Tabs -->
@@ -122,8 +120,8 @@ READY.
       window.EJS_startOnLoaded   = true;
       window.EJS_defaultControls = false;
       window.EJS_Buttons         = { saveState: false, loadState: false, screenRecord: false, cheat: false, cacheManager: false };
-      window.EJS_defaultOptions  = { 'directKeyboard': true, 'lockMouse': false };
-      window.EJS_settings        = { 'vice_joyport': '2', 'vice_autostart': 'enabled', 'vice_keyboard_passthrough': 'enabled' };
+      window.EJS_defaultOptions  = { 'keyboardInput': 'enabled', 'lockMouse': false };
+      window.EJS_settings        = { 'vice_joyport': '2', 'vice_autostart': 'enabled', 'vice_keyboard_passthrough': 'enabled', 'vice_drive_true_emulation': 'disabled', 'vice_virtual_device_traps': 'enabled' };
 
       window.EJS_ready = function() {
         var tries = 0;
