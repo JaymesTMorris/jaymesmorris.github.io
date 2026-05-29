@@ -135,8 +135,8 @@ READY.
       window.EJS_startOnLoaded   = true;
       window.EJS_defaultControls = false;
       window.EJS_Buttons         = { saveState: false, loadState: false, screenRecord: false, cheat: false, cacheManager: false };
-      window.EJS_defaultOptions  = { 'directKeyboard': true };
-      window.EJS_settings        = { 'vice_joyport': '2', 'vice_autostart': 'disabled', 'vice_keyboard_passthrough': 'enabled' };
+      window.EJS_defaultOptions  = { 'directKeyboard': true, 'lockMouse': false };
+      window.EJS_settings        = { 'vice_joyport': '2', 'vice_joyport_type': '1', 'vice_autostart': 'disabled', 'vice_keyboard_passthrough': 'enabled' };
 
       window.EJS_ready = function() {
         var tries = 0;
@@ -156,11 +156,11 @@ READY.
         var joy = { 'ArrowUp': 4, 'ArrowDown': 5, 'ArrowLeft': 6, 'ArrowRight': 7, ' ': 0, 'Control': 0 };
         document.addEventListener('keydown', function(e) {
           if (joy[e.key] !== undefined && window.EJS_emulator)
-            window.EJS_emulator.gameManager.simulateInput(0, 1, joy[e.key], 1);
+            window.EJS_emulator.simulateInput(0, 1, joy[e.key], 1);
         });
         document.addEventListener('keyup', function(e) {
           if (joy[e.key] !== undefined && window.EJS_emulator)
-            window.EJS_emulator.gameManager.simulateInput(0, 1, joy[e.key], 0);
+            window.EJS_emulator.simulateInput(0, 1, joy[e.key], 0);
         });
       };
 
