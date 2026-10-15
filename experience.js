@@ -3,9 +3,9 @@ const softwareProjects = [
     title: "ASRC Federal Software Engineer Intern",
     type: "Jan 2025 - Present",
     desc: "I support ASRC Federal Mission Solutions as part of Rowan University's research team, \
-    prototyping and redesigning U.S. Navy combat-system interfaces using C++ and Qt. Work includes \
-    overhauling the alert client application to replace a SQLite backend with Redis/Valkey and \
-    introducing an Oat++ WebSocket layer to decouple the UI from the data backend."
+    prototyping user interfaces in C++ and Qt to modernize Aegis Combat System displays. I set up a \
+    Redis/Valkey backend to supply data to the UI prototypes, and I am now rebuilding the Qt prototype \
+    in React, integrated with the existing Redis/Valkey backend."
   },
   {
     title: "Student Tech Lead at Rowan University",
@@ -23,7 +23,7 @@ const softwareProjects = [
   },
   {
     title: "Cryptologic Technician Technical (CTT) - US Navy Active Duty",
-    type: "Feb 2019 - Feb 2024",
+    type: "Feb 2020 - Feb 2024",
     desc: "Served as a Cryptologic Technician Technical and Work Center Supervisor, leading a division of \
     20 sailors and ensuring the completion of corrective and preventive maintenance across mission-critical \
     systems. Responsibilities included training and mentoring junior personnel, maintaining operational \

@@ -56,9 +56,18 @@ const games = [
   {
     title: "AFMS Alert UI",
     type: "swe",
-    desc: "A Qt C++ desktop application built during a software engineering internship with ASRC Federal \
-    Mission Solutions. Redesigned the alert client UI and replaced a SQLite backend with Redis/Valkey, \
-    then introduced an Oat++ WebSocket layer to decouple the UI from the data backend.",
+    desc: "A Qt C++ prototype UI built during a software engineering internship with ASRC Federal \
+    Mission Solutions to modernize Aegis Combat System displays, backed by a Redis/Valkey data store. \
+    The prototype is now being rebuilt in React on top of the same Redis/Valkey backend.",
+    link: "#",
+    code: "#",
+  },
+  {
+    title: "NutriPlan",
+    type: "swe",
+    desc: "A full-stack recipe web app co-developed as a Rowan University senior project (Fall 2026). \
+    Features user accounts, recipe search powered by the Spoonacular API, and saved favorites. Built \
+    with JavaScript, Bootstrap, Node.js/Express, and SQLite.",
     link: "#",
     code: "#",
   }
