@@ -12,7 +12,19 @@
 
       gtag('config', 'G-TR0WR1PST9');
     </script>
-    <title>Jaymes Morris | Portfolio</title>
+    <title>Jaymes Morris | Software Engineer</title>
+    <meta
+      name="description"
+      content="Portfolio of Jaymes Morris, a software engineer, U.S. Navy veteran, and Rowan University student building UI prototypes in C++, Qt, and React."
+    />
+    <meta property="og:title" content="Jaymes Morris | Software Engineer" />
+    <meta
+      property="og:description"
+      content="Software engineer, U.S. Navy veteran, and Rowan University student. Experience, projects, and resume."
+    />
+    <meta property="og:url" content="https://jaymesmorris.com/" />
+    <meta property="og:image" content="https://jaymesmorris.com/assets/images/PFPimage.jpg" />
+    <meta property="og:type" content="website" />
     <link rel="stylesheet" href="styles.css" />
     <link
       rel="stylesheet"
@@ -72,10 +84,14 @@
           </p>
           <p>
             I enjoy participating in hackathons and game development
-            competitions, where I collaborate under tight deadlines
-            (i.e., 48 hours) to design and build applications, games, and websites.
+            competitions, where I collaborate under tight deadlines, from
+            24-hour hackathons to 30-day game jams, to design and build
+            applications, games, and websites.
           </p>
-          </a>
+          <p>
+            I am graduating in Fall 2026 and seeking full-time software
+            engineering roles.
+          </p>
         </div>
       </div>
     </section>
@@ -85,7 +101,10 @@
       const res = await fetch(path);
       const html = await res.text();
       document.getElementById(id).innerHTML = html;
+      const year = document.getElementById("footer-year");
+      if (year) year.textContent = new Date().getFullYear();
     }
     loadComponent("footer-placeholder", "components/footer.html");
   </script>
+  </body>
 </html>

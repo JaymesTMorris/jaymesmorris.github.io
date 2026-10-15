@@ -207,6 +207,34 @@ footer {
   color: var(--text-muted);
 }
 
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+  font-size: 1.05rem;
+}
+
+.footer-links i {
+  margin-right: 6px;
+}
+
+.resume-actions {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.resume-actions .filter-btn {
+  margin-top: 0;
+}
+
+.resume-actions i {
+  margin-right: 6px;
+}
+
 .carousel-container {
   position: relative;
   max-width: 700px;

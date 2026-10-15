@@ -12,7 +12,11 @@
 
       gtag('config', 'G-TR0WR1PST9');
     </script>
-    <title>Jaymes Morris | Portfolio</title>
+    <title>Resume | Jaymes Morris</title>
+    <meta
+      name="description"
+      content="Resume of Jaymes Morris: software engineer, U.S. Navy veteran, and Rowan University Computing and Informatics student. View or download the PDF."
+    />
     <link rel="stylesheet" href="../styles.css" />
     <link
       rel="stylesheet"
@@ -33,12 +37,33 @@
     </header>
 
     <section class="content">
+      <div class="resume-actions">
+        <a href="../assets/resume.pdf" class="filter-btn" download="Jaymes-Morris-Resume.pdf"
+          ><i class="fa-solid fa-download"></i> Download PDF</a
+        >
+        <a href="../assets/resume.pdf" class="filter-btn" target="_blank" rel="noopener"
+          ><i class="fa-solid fa-up-right-from-square"></i> Open in New Tab</a
+        >
+      </div>
       <iframe
         src="../assets/resume.pdf"
         class="pdf-frame"
         title="Jaymes Morris Resume"
       >
       </iframe>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+      async function loadComponent(id, path) {
+        const res = await fetch(path);
+        const html = await res.text();
+        document.getElementById(id).innerHTML = html;
+        const year = document.getElementById("footer-year");
+        if (year) year.textContent = new Date().getFullYear();
+      }
+      loadComponent("footer-placeholder", "../components/footer.html");
     </script>
   </body>
 </html>

@@ -12,7 +12,11 @@
 
       gtag('config', 'G-TR0WR1PST9');
     </script>
-    <title>Jaymes Morris | Portfolio</title>
+    <title>Projects | Jaymes Morris</title>
+    <meta
+      name="description"
+      content="Projects by Jaymes Morris, including award-winning Godot game jam entries, hackathon builds, full-stack web apps, and internship software."
+    />
     <link rel="stylesheet" href="../styles.css" />
     <link
       rel="stylesheet"
@@ -63,6 +67,8 @@
         const res = await fetch(path);
         const html = await res.text();
         document.getElementById(id).innerHTML = html;
+        const year = document.getElementById("footer-year");
+        if (year) year.textContent = new Date().getFullYear();
       }
       loadComponent("footer-placeholder", "../components/footer.html");
     </script>

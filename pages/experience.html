@@ -12,7 +12,11 @@
 
       gtag('config', 'G-TR0WR1PST9');
     </script>
-    <title>Jaymes Morris | Portfolio</title>
+    <title>Experience | Jaymes Morris</title>
+    <meta
+      name="description"
+      content="Work experience of Jaymes Morris: software engineer intern at ASRC Federal, Rowan University student tech lead, and U.S. Navy Cryptologic Technician."
+    />
     <link rel="stylesheet" href="../styles.css" />
     <link
       rel="stylesheet"
@@ -36,6 +40,42 @@
       <h2>Experience</h2>
 
       <div id="software-list"></div>
+
+      <h2>Leadership &amp; Achievements</h2>
+
+      <div class="project-card">
+        <h3 class="experience-title">Vice President, Rowan ACM</h3>
+        <p>
+          Served as Vice President of Rowan University's Association for
+          Computing Machinery club.
+        </p>
+        <span class="skills-badge" style="font-size:0.75rem; background:#444; padding: 4px 10px;">FALL 2025 - SPRING 2026</span>
+      </div>
+
+      <div class="project-card">
+        <h3 class="experience-title">Committee Head, ACM Game Development Committee</h3>
+        <p>Led Rowan ACM's Game Development Committee.</p>
+        <span class="skills-badge" style="font-size:0.75rem; background:#444; padding: 4px 10px;">SPRING 2025</span>
+      </div>
+
+      <div class="project-card">
+        <h3 class="experience-title">Navy and Marine Corps Achievement Medal (x2)</h3>
+        <p>
+          Awarded two Navy and Marine Corps Achievement Medals for exemplary
+          performance and contributions while serving as a Cryptologic
+          Technician and Work Center Supervisor onboard the USS Leyte Gulf
+          (CG-55).
+        </p>
+      </div>
+
+      <div class="project-card">
+        <h3 class="experience-title">Eagle Scout</h3>
+        <p>
+          Achieved the rank of Eagle Scout through the Boy Scouts of America,
+          demonstrating leadership, commitment, and community service.
+        </p>
+        <span class="skills-badge" style="font-size:0.75rem; background:#444; padding: 4px 10px;">2019</span>
+      </div>
     </section>
 
     <div id="footer-placeholder"></div>
@@ -45,6 +85,8 @@
         const res = await fetch(path);
         const html = await res.text();
         document.getElementById(id).innerHTML = html;
+        const year = document.getElementById("footer-year");
+        if (year) year.textContent = new Date().getFullYear();
       }
       loadComponent("footer-placeholder", "../components/footer.html");
     </script>
