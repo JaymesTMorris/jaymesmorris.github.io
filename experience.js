@@ -9,7 +9,7 @@ const softwareProjects = [
   },
   {
     title: "Student Tech Lead at Rowan University",
-    type: "Sep 2024 - Present",
+    type: "Aug 2024 - Present",
     desc: "Oversees technical equipment in the Rowan University TechLounge & MakerSpace, including 3D \
     printers, 3D scanners, and robotic arms. Responsibilities include participating in the interviewing and \
     hiring of 24 student workers and developing detailed user guides covering setup, operation, and closing \
